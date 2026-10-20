@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Janet Silene Fernández – Portfolio</title>
+<meta name="description" content="Desarrolladora SAP ABAP Senior con 17 años de experiencia. Casos de trabajo y proyectos en SAP CAP y RAP.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0f1722; --surface:#172233; --line:#26344a; --text:#e4ebf5; --muted:#9aa9bf; --accent:#3da9fc; --accent-soft:#123a5a; --kw:#f2b84b; }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin:0; background:var(--bg); color:var(--text); font-family:"Poppins",system-ui,sans-serif; line-height:1.65; }
+  a { color:var(--accent); text-decoration:none; }
+  a:hover { text-decoration:underline; }
+  a:focus-visible, summary:focus-visible { outline:3px solid var(--kw); outline-offset:3px; border-radius:4px; }
+
+  .code-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; font-family:"JetBrains Mono",monospace; font-size:15px; line-height:1.9; color:var(--accent); opacity:.08; white-space:pre; padding:24px; -webkit-mask-image:linear-gradient(#000 60%,transparent); mask-image:linear-gradient(#000 60%,transparent); }
+  header { position:relative; text-align:center; padding:72px 20px 56px; overflow:hidden; }
+  .hero { position:relative; max-width:720px; margin:0 auto; }
+  .avatar { position:relative; width:168px; height:168px; margin:0 auto 28px; border-radius:50%; border:4px solid var(--accent); box-shadow:0 0 0 10px var(--accent-soft); background:var(--surface); overflow:hidden; display:grid; place-items:center; font-size:3rem; font-weight:600; color:var(--accent); }
+  .avatar img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+  h1 { font-size:clamp(2.2rem,7vw,3.4rem); line-height:1.15; margin:0 0 14px; font-weight:600; color:#cfe4ff; }
+  .role { font-size:clamp(1.05rem,3vw,1.3rem); color:var(--muted); margin:0 0 28px; }
+  .contact { display:flex; flex-wrap:wrap; justify-content:center; gap:10px 26px; margin:0; padding:0; list-style:none; }
+
+  main { max-width:720px; margin:0 auto; padding:0 20px 72px; }
+  section { padding-top:48px; }
+  h2 { font-size:1.5rem; margin:0 0 8px; font-weight:600; }
+  .lead { color:var(--muted); font-size:.95rem; margin:0 0 20px; }
+  p { margin:0 0 14px; max-width:68ch; }
+
+  .card, details { background:var(--surface); border:1px solid var(--line); border-left:4px solid var(--accent); border-radius:6px; margin-bottom:14px; }
+  .card { padding:18px 20px; }
+  .card h3 { margin:0 0 6px; font-size:1.1rem; font-weight:500; }
+  .card p { color:var(--muted); font-size:.95rem; }
+
+  summary { cursor:pointer; padding:16px 20px; list-style:none; }
+  summary::-webkit-details-marker { display:none; }
+  summary .t { display:block; font-weight:500; font-size:1.05rem; }
+  summary .s { display:block; color:var(--muted); font-size:.85rem; margin-top:2px; }
+  summary::after { content:"+"; float:right; margin-top:-34px; font-size:1.4rem; color:var(--accent); }
+  details[open] summary::after { content:"−"; }
+  details[open] summary { border-bottom:1px solid var(--line); }
+  dl { margin:0; padding:16px 20px 6px; }
+  dt { font-weight:500; font-size:.9rem; margin-top:10px; }
+  dd { margin:2px 0 0; color:var(--muted); font-size:.95rem; max-width:68ch; }
+
+  .tags { display:flex; flex-wrap:wrap; gap:8px; margin:6px 0 10px; padding:0; list-style:none; }
+  .tags li { font-family:"JetBrains Mono",monospace; font-size:.8rem; color:var(--kw); border:1px solid var(--line); border-radius:4px; padding:2px 8px; }
+
+  .timeline { margin:0; padding:0; list-style:none; border-left:2px solid var(--line); }
+  .timeline li { position:relative; padding:0 0 18px 22px; }
+  .timeline li::before { content:""; position:absolute; left:-7px; top:9px; width:12px; height:12px; border-radius:50%; background:var(--accent); }
+  .timeline b { font-weight:500; }
+  .timeline .when { display:block; font-size:.82rem; color:var(--muted); }
+  .timeline p { color:var(--muted); font-size:.92rem; margin:2px 0 0; }
+
+  .cols { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; }
+  .cols h3 { margin:0 0 6px; font-size:1rem; font-weight:500; }
+  footer { border-top:1px solid var(--line); padding:24px 20px; text-align:center; color:var(--muted); font-size:.85rem; }
+  @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="code-bg" aria-hidden="true">REPORT zsales_orders.
+START-OF-SELECTION.
+  SELECT * FROM zheader_so_0133
+    INTO TABLE @DATA(lt_header).
+
+entity Header : cuid, managed {
+  customer : String(80);
+  items    : Composition of many Items
+             on items.header = $self;
+}
+
+define root view entity ZI_Header_SO
+  as select from zheader_so_0133
+{ key sales_order, customer }</div>
+  <div class="hero">
+    <div class="avatar">
+      <span aria-hidden="true">JF</span>
+      <!-- Sube tu foto con el nombre foto.jpg junto a este archivo -->
+      <img src="foto.jpg" alt="Foto de Janet Silene Fernández" onerror="this.remove()">
+    </div>
+    <h1>Janet Silene Fernández</h1>
+    <p class="role">Desarrolladora SAP ABAP Senior · SAP BTP (CAP y RAP)</p>
+    <ul class="contact">
+      <li><a href="mailto:tu-correo@ejemplo.com">tu-correo@ejemplo.com</a></li>
+      <li><a href="https://github.com/tu-usuario">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/tu-perfil/">LinkedIn</a></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+  <section id="sobre-mi">
+    <h2>Sobre mí</h2>
+    <p>Tengo 17 años en IT, 16 de ellos como consultora técnica SAP ABAP, en proyectos para empresas de Argentina, Chile, Colombia, Perú y Australia. He trabajado en implementaciones, soporte evolutivo, upgrades, integraciones y Go-Lives, y también he liderado equipos técnicos y programas de formación.</p>
+    <p>Terminé el Máster SAP BTP Backend Developer de Logali y ahora llevo esa experiencia al desarrollo moderno con CAP, RAP y Fiori.</p>
+  </section>
+
+  <section id="proyectos">
+    <h2>Proyectos propios</h2>
+    <p class="lead">Código mío, construido durante el máster.</p>
+    <article class="card">
+      <h3>Sales Orders con SAP CAP</h3>
+      <p>Aplicación de pedidos de venta con modelo Header e Items en schema.cds, servicio OData e interfaz Fiori Elements.</p>
+      <ul class="tags"><li>CAP</li><li>CDS</li><li>OData</li><li>Fiori Elements</li></ul>
+    </article>
+    <article class="card">
+      <h3>Sales Orders con RAP (ABAP)</h3>
+      <p>La misma solución en ABAP con RAP en modo managed, sin Draft, probada con la vista previa de Fiori en ADT.</p>
+      <ul class="tags"><li>ABAP</li><li>RAP</li><li>CDS Views</li><li>ADT</li></ul>
+    </article>
+    <!-- Cuando subas el código a GitHub, añade aquí: <p><a href="URL-del-repo">Ver repositorio</a></p> -->
+  </section>
+
+  <section id="casos">
+    <h2>Casos de trabajo</h2>
+    <p class="lead">Seis casos de proyectos reales, descritos por sector y sin datos de clientes. Toca uno para abrirlo.</p>
+
+    <details>
+      <summary><span class="t">Automatización de informes para una campaña estacional</span><span class="s">Sector alimentario · 2025–2026 · Tech Lead del proyecto</span></summary>
+      <dl>
+        <dt>Contexto</dt><dd>Varias áreas de negocio necesitaban información actualizada cada día para tomar decisiones durante la campaña, y reunirla en un fichero Excel les suponía una carga diaria.</dd>
+        <dt>Mi rol</dt><dd>Levanté la necesidad desde cero con los distintos frentes del negocio, identifiqué las tecnologías implicadas (no solo SAP) y fijé el objetivo y el enfoque junto a los usuarios clave.</dd>
+        <dt>Qué construí</dt><dd>Presenté la propuesta y, con el visto bueno, desarrollé los dos informes centrales de la campaña, automatizados e integrando SAP con otras tecnologías.</dd>
+        <dt>Resultado</dt><dd>Los informes quedaron disponibles con información actualizada a diario y bajó la carga diaria de esas áreas.</dd>
+        <dt>Tecnologías</dt><dd><ul class="tags"><li>SAP S/4HANA</li><li>ABAP</li><li>SharePoint</li><li>Power Automate</li><li>Scripts</li></ul></dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary><span class="t">Gestión de pólizas de seguro dentro de SAP</span><span class="s">Sector alimentario · 2025–2026 · Proyecto de punta a punta</span></summary>
+      <dl>
+        <dt>Contexto</dt><dd>El área de negocio necesitaba registrar sus pólizas de seguro en SAP y recibir avisos de vencimiento.</dd>
+        <dt>Mi rol</dt><dd>Llevé el proyecto completo: reunión con la gerencia, relevamiento de definiciones, propuesta y presentación de la solución, modelado de datos y desarrollo en dos fases.</dd>
+        <dt>Qué construí</dt><dd>Dos piezas centrales: un ABM de pólizas con tablas propias y pantallas Dynpro, y un job planificado que envía avisos periódicos por mail sobre los vencimientos, con PDF generado desde spool.</dd>
+        <dt>Entrega</dt><dd>Pruebas unitarias, despliegue, manual de usuario y capacitación a los usuarios.</dd>
+        <dt>Tecnologías</dt><dd><ul class="tags"><li>ABAP</li><li>Dynpros</li><li>Jobs</li><li>Spool a PDF</li><li>Envío de mail</li></ul></dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary><span class="t">Integraciones de SAP con sistemas externos</span><span class="s">Sector alimentario · 2025–2026 · Referente técnica</span></summary>
+      <dl>
+        <dt>Interfaz con un servicio externo de RR. HH.</dt><dd>Fui la referente técnica y quien implementó la integración de SAP con el proveedor del servicio, mediante interfaz y transferencia de ficheros por SFTP.</dd>
+        <dt>Fichajes de tornos</dt><dd>Con el equipo funcional del proveedor definimos el proceso de actualización de marcajes. Lo probé en el entorno de test y lo dejé planificado como job en productivo.</dd>
+        <dt>Web Service para una planta en otro país</dt><dd>La especificación tenía solo un par de líneas, así que primero hice reuniones para entender la necesidad. Después construí un Web Service provider para gestionar materias primas, operativo en producción y consumido desde fuera de SAP.</dd>
+        <dt>Tecnologías</dt><dd><ul class="tags"><li>ABAP</li><li>Web Services</li><li>SFTP</li><li>Interfaces</li><li>Jobs</li></ul></dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary><span class="t">Retenciones y percepciones fiscales de Argentina en una migración a S/4HANA</span><span class="s">Distribución de alimentos · 2023–2025 · Diseño del proceso</span></summary>
+      <dl>
+        <dt>Contexto</dt><dd>Implementación de S/4HANA para una empresa de distribución de alimentos que operaba en Argentina, con obligaciones de retenciones y percepciones ante varios organismos.</dd>
+        <dt>Mi rol</dt><dd>Estuve a cargo del diseño del proceso y de su arquitectura para las declaraciones juradas de CABA, provincia de Buenos Aires, Tucumán, SIRCAR y SIFERE.</dd>
+        <dt>Qué construí</dt><dd>Terminé, mejoré e implementé los padrones de CABA, Buenos Aires y Tucumán para percepciones y retenciones, y diseñé el libro diario.</dd>
+        <dt>Resultado</dt><dd>El proyecto salió a producción con éxito.</dd>
+        <dt>Tecnologías</dt><dd><ul class="tags"><li>ABAP on HANA</li><li>Adobe Forms</li><li>IDocs</li><li>RFC</li></ul></dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary><span class="t">De AS400 a SAP Banking: módulo de transferencias automáticas</span><span class="s">Banca pública · Galea · Tech Lead</span></summary>
+      <dl>
+        <dt>Contexto</dt><dd>Migración de las transferencias automáticas de un sistema AS400 a SAP Banking.</dd>
+        <dt>Mi rol</dt><dd>Tech Lead de un equipo técnico con consultores junior a mi cargo. Hice la ingeniería y la arquitectura de la solución y relevé las definiciones con los usuarios que pasaban a ser los futuros funcionales.</dd>
+        <dt>Qué construí</dt><dd>Un módulo que imputa transacciones en el módulo DM de SAP Banking, con procesos masivos (batch bancario) usando procesamiento paralelo con PPF. Después fui referente técnica de su mantenimiento.</dd>
+        <dt>Tecnologías</dt><dd><ul class="tags"><li>ABAP</li><li>SAP Banking</li><li>PPF</li><li>Workflow</li><li>LSMW</li><li>Smartforms</li><li>IDocs</li></ul></dd>
+      </dl>
+    </details>
+
+    <details>
+      <summary><span class="t">Liderazgo y formación técnica</span><span class="s">IBM Consulting · 2021–2023</span></summary>
+      <dl>
+        <dt>People Manager</dt><dd>Gestioné un equipo: evaluaciones, promociones, ajustes salariales, reuniones 1 a 1 y acompañamiento de carrera.</dd>
+        <dt>Líder del Garage SAP</dt><dd>Gestioné el pool de recursos SAP, su asignación a proyectos y la coordinación con PMs y líderes de LATAM.</dd>
+        <dt>Programa de becas y pasantías ABAP</dt><dd>Estuve a cargo del programa: preparé el entorno de práctica y el material, di formación y acompañé a los jóvenes seleccionados. También participé en procesos de selección.</dd>
+        <dt>Antes, en banca</dt><dd>Diseñé y di capacitaciones teórico-prácticas de ABAP para el equipo de mantenimiento SAP de un banco.</dd>
+      </dl>
+    </details>
+  </section>
+
+  <section id="trayectoria">
+    <h2>Trayectoria</h2>
+    <ol class="timeline">
+      <li><b>Oxigent Technologies · Consultora SAP ABAP Sr.</b><span class="when">Mayo 2025 – mayo 2026</span><p>Desarrollo, soporte e integraciones en S/4HANA para una empresa del sector alimentario, y acompañamiento de un upgrade ejecutado por un proveedor externo.</p></li>
+      <li><b>Globant · Analista Programadora ABAP Sr.</b><span class="when">Septiembre 2023 – mayo 2025</span><p>Implementaciones S/4HANA en distribución de alimentos y HealthTech: localización fiscal, integraciones con RFC e IDocs, documentación en inglés y español.</p></li>
+      <li><b>IBM Consulting · Analista Programadora ABAP Sr. y People Manager</b><span class="when">Enero 2021 – septiembre 2023</span><p>Proyectos S/4HANA y ECC en Perú, Chile, Colombia y Argentina, de industria, forestal, alimentación, salud, energía, automotriz y banca. Technical lead en proyectos de integración y soporte evolutivo.</p></li>
+      <li><b>Softtek · Analista Programadora ABAP Sr.</b><span class="when">2020</span><p>Soporte de ECC y S/4HANA para más de 20 clientes de Argentina, Chile y Australia. Referente técnica de un cliente del sector retail.</p></li>
+      <li><b>Novatium · Analista funcional BP/DM y ABAP</b><span class="when">Enero 2018 – enero 2019</span><p>Clientes y cuentas en SAP Banking para banca pública.</p></li>
+      <li><b>Galea · Programadora ABAP Sr.</b><span class="when">2009 – 2018</span><p>Desarrollo y liderazgo técnico en SAP Banking y ERP, migraciones masivas y formación ABAP.</p></li>
+      <li><b>Indra · Programadora Jr.</b><span class="when">2008 – 2009</span><p>Soporte y desarrollo en SAP ERP (MM y HR), además de .NET y Visual Basic.</p></li>
+    </ol>
+  </section>
+
+  <section id="habilidades">
+    <h2>Habilidades y formación</h2>
+    <div class="cols">
+      <div><h3>ABAP</h3><ul class="tags"><li>Reports y ALV</li><li>Smartforms</li><li>SAPscript</li><li>Adobe Forms</li><li>BAPI y BADI</li><li>RFC e IDocs</li><li>Web Services</li><li>Workflow</li></ul></div>
+      <div><h3>Moderno</h3><ul class="tags"><li>RAP</li><li>CAP</li><li>CDS</li><li>OData</li><li>Fiori Elements</li><li>SAP BTP</li></ul></div>
+      <div><h3>Herramientas</h3><ul class="tags"><li>SolMan</li><li>Jira</li><li>SharePoint</li><li>Power Automate</li><li>Metodología ágil</li></ul></div>
+    </div>
+    <ul style="margin-top:22px; padding-left:20px; color:var(--muted); font-size:.95rem">
+      <li>Máster SAP BTP Backend Developer, Logali (300 h, octubre de 2026)</li>
+      <li>SAP Integration Suite, SAP Live Class</li>
+      <li>AWS Cloud Practitioner Essentials (2023)</li>
+      <li>Fiori, SAPUI5 y OData (2020)</li>
+      <li>Consultor funcional MM, certificación SAP</li>
+      <li>Analista en Programación, ESBA · Lic. en Ciencias de la Computación, Universidad Nacional de Córdoba (cursada sin finalizar)</li>
+    </ul>
+  </section>
+</main>
+
+<footer>© 2026 Janet Silene Fernández</footer>
+</body>
+</html>
